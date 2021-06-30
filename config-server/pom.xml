@@ -8,12 +8,18 @@
 		<version>1.0</version>
 		<relativePath/>
 	</parent>
+
 	<groupId>com.formcloud</groupId>
 	<artifactId>config-server</artifactId>
-	<version>1.0</version>
+	<version>${config-server.version}</version>
 	<name>config-server</name>
-	<description>Demo project for Spring Boot</description>
-	<properties>
-		<java.version>11</java.version>
-	</properties>
+	<description>Application to save all properties project</description>
+
+	<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-config-server</artifactId>
+			</dependency>
+	</dependencies>
+
 </project>

@@ -9,11 +9,8 @@
 
 	<groupId>com.formcloud</groupId>
 	<artifactId>spring-util</artifactId>
-	<version>1.0</version>
+	<version>${spring-util.version}</version>
 	<name>spring-util</name>
 	<description>Utilities and microframeworks to use on projects</description>
-	<properties>
-		<java.version>11</java.version>
-	</properties>
 
 </project>
