@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "console": "internalConsole",
+            "name": "ms-form-create run",
+            "request": "launch",
+            "mainClass": "com.formcloud.formcreate.MsFormCreateApplication",
+            "projectName": "ms-form-create"
+        },
+        {
+            "type": "java",
+            "name": "config-server run",
+            "console": "internalConsole",
+            "request": "launch",
+            "mainClass": "com.formcloud.configserver.ConfigServerApplication",
+            "projectName": "config-server"
+        }
+    ]
+}
