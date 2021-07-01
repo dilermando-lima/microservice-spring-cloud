@@ -23,11 +23,26 @@ public class Valid {
 		throw new ApiException(httpStatus , msgError );
 	}
 
+	public static void objNull(int httpStatus, String msgError, Object value) throws ApiException{
+		objNull(HttpStatus.valueOf(httpStatus), msgError, value);
+	}
+
+	public static void objNull(String msgError, Object value) throws ApiException{
+	  objNull(HttpStatus.BAD_REQUEST, msgError, value);
+	}
 
 	public static void stringNullOrTrimEmpty(HttpStatus httpStatus, String msgError, Object value) throws ApiException{
 		if(  value == null || value.toString().trim().equals("")  ) {
 			throw new ApiException(httpStatus , msgError );
 		}
+	}
+
+	public static void stringNullOrTrimEmpty(int httpStatus, String msgError, Object value) throws ApiException{
+		stringNullOrTrimEmpty(HttpStatus.valueOf(httpStatus), msgError, value);
+	}
+
+	public static void stringNullOrTrimEmpty(String msgError, Object value) throws ApiException{
+		stringNullOrTrimEmpty(HttpStatus.BAD_REQUEST, msgError, value);
 	}
 
 	public static void emailMultNotValid(HttpStatus httpStatus, String msgError, Object value) throws ApiException{
@@ -37,12 +52,29 @@ public class Valid {
 			throw new ApiException(httpStatus , msgError );
 	}
 
+	public static void emailMultNotValid(String msgError, Object value) throws ApiException{
+		emailMultNotValid(HttpStatus.BAD_REQUEST, msgError, value);
+	}
+
+	public static void emailMultNotValid(int httpStatus, String msgError, Object value) throws ApiException{
+		emailMultNotValid(HttpStatus.valueOf(httpStatus), msgError, value);
+	}
+
+
 	public static void linkHttpValid(HttpStatus httpStatus, String msgError, Object value) throws ApiException{
 		if( value == null ) return;
 			
 		if(  !LINK_HTTP_REGEX.matcher(value.toString()).matches() ) 
 			throw new ApiException(httpStatus , msgError );
 	}
+
+	public static void linkHttpValid(int httpStatus, String msgError, Object value) throws ApiException{
+		linkHttpValid(HttpStatus.valueOf(httpStatus), msgError, value);
+	}
+	public static void linkHttpValid(String msgError, Object value) throws ApiException{
+		linkHttpValid(HttpStatus.BAD_REQUEST, msgError, value);
+	}
+
 
 	public static void mapNullOrEmpty(HttpStatus httpStatus, String msgError, Object value) throws ApiException{
 		if(  value == null ) 
@@ -53,6 +85,16 @@ public class Valid {
 		}
 		
 	}
+
+	public static void mapNullOrEmpty(String msgError, Object value) throws ApiException{
+		mapNullOrEmpty(HttpStatus.BAD_REQUEST, msgError, value);
+	}
+
+	public static void mapNullOrEmpty(int httpStatus, String msgError, Object value) throws ApiException{
+		mapNullOrEmpty(HttpStatus.valueOf(httpStatus), msgError, value);
+	}
+
+
 	public static void longNullOrInvalid(HttpStatus httpStatus, String msgError, Object value) throws ApiException{
 		if(  value == null ) 
 		throw new ApiException(httpStatus , msgError );
@@ -64,6 +106,17 @@ public class Valid {
 		}
 	}
 
+	
+
+	public static void longNullOrInvalid(int httpStatus, String msgError, Object value) throws ApiException{
+		longNullOrInvalid(HttpStatus.valueOf(httpStatus), msgError, value);
+	}
+
+	public static void longNullOrInvalid(String msgError, Object value) throws ApiException{
+		longNullOrInvalid(HttpStatus.BAD_REQUEST, msgError, value);
+	}
+
+
 	public static void intNullOrInvalid(HttpStatus httpStatus, String msgError, Object value) throws ApiException{
 		if(  value == null ) 
 		throw new ApiException(httpStatus , msgError );
@@ -74,6 +127,15 @@ public class Valid {
 			throw new ApiException(httpStatus , msgError );
 		}
 	}
+
+	public static void intNullOrInvalid(int httpStatus, String msgError, Object value) throws ApiException{
+		intNullOrInvalid(HttpStatus.valueOf(httpStatus), msgError, value);
+	}
+
+	public static void intNullOrInvalid(String msgError, Object value) throws ApiException{
+		intNullOrInvalid(HttpStatus.BAD_REQUEST, msgError, value);
+	}
+
 
 	public static void intNullOrZero(HttpStatus httpStatus, String msgError, Object value) throws ApiException{
 		if( value == null ) throw new ApiException(httpStatus , msgError );
@@ -88,6 +150,15 @@ public class Valid {
 		
 	}
 
+	public static void intNullOrZero(int httpStatus, String msgError, Object value) throws ApiException{
+		intNullOrZero(HttpStatus.valueOf(httpStatus), msgError, value);
+	}
+
+	public static void intNullOrZero(String msgError, Object value) throws ApiException{
+		intNullOrZero(HttpStatus.BAD_REQUEST, msgError, value);
+	}
+
+
 	public static void listNullOrEmpty(HttpStatus httpStatus, String msgError, Object value) throws ApiException{
 		if(  value == null ) 
 		throw new ApiException(httpStatus , msgError );
@@ -95,6 +166,15 @@ public class Valid {
 		if(  (( List<?>  )value).isEmpty() ) {
 			throw new ApiException(httpStatus , msgError );
 		}
+	}
+
+	public static void listNullOrEmpty(String msgError, Object value) throws ApiException{
+		listNullOrEmpty(HttpStatus.BAD_REQUEST, msgError, value);
+	}
+
+
+	public static void listNullOrEmpty(int httpStatus, String msgError, Object value) throws ApiException{
+		listNullOrEmpty(HttpStatus.valueOf(httpStatus), msgError, value);
 	}
 
 	public static void emailSingleNotValid(HttpStatus httpStatus, String msgError, Object value) throws ApiException{
@@ -105,12 +185,27 @@ public class Valid {
 		
 	}
 
+	public static void emailSingleNotValid(int httpStatus, String msgError, Object value) throws ApiException{
+		emailSingleNotValid(HttpStatus.valueOf(httpStatus), msgError, value);
+	}
+
+	public static void emailSingleNotValid(String msgError, Object value) throws ApiException{
+		emailSingleNotValid(HttpStatus.BAD_REQUEST, msgError, value);
+	}
+
 	public static void check(HttpStatus httpStatus , String msgError, boolean condition) throws ApiException{
 		if( condition  ) {
 			throw new ApiException(httpStatus , msgError );
 		}
 	}
 	
+	public static void check(int httpStatus, String msgError,  boolean condition) throws ApiException{
+		check(HttpStatus.valueOf(httpStatus), msgError, condition);
+	}
+
+	public static void check(String msgError, boolean condition) throws ApiException{
+		check(HttpStatus.BAD_REQUEST, msgError, condition);
+	}
 
 
 }

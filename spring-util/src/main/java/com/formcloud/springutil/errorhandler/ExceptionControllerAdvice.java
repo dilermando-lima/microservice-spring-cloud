@@ -35,13 +35,13 @@ public class ExceptionControllerAdvice{
     }
 
 
-	/*@ExceptionHandler({  Exception.class}) // don't use this public api. All messages api needs to be treated.
+	@ExceptionHandler({  Exception.class ,  RuntimeException.class})
     public ResponseEntity<ErrorReturn> anyException( final Exception ex, final WebRequest request) {
 		ex.printStackTrace();
     	return new ResponseEntity<ErrorReturn>(
 		 	    		  new ErrorReturn( ex.getMessage() ,
 		 	    		  HttpStatus.INTERNAL_SERVER_ERROR .value() ) ,  HttpStatus.INTERNAL_SERVER_ERROR );
-    }*/
+    }
     
 
     
