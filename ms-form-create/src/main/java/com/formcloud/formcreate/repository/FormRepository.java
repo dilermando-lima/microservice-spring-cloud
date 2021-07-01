@@ -15,11 +15,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FormRepository extends JpaRepository<Form, String> {
-    @Query("select obj from #{#entityName} obj where key = ?1 ")
-    List<Form> getFormByKey(String key);
 
     @Query("select obj from #{#entityName} obj where key = ?1 order by version desc")
-    List<Form> getFormByKeyOrderByVersionDesc(String key, Pageable pageable);
+    List<Form> listFormByKeyOrderByVersionDesc(String key, Pageable pageable);
 
     @Query("select obj from #{#entityName} obj where key = ?1 and version = ?2 ")
     Form getFormByKeyAndVersion(String key, Integer version);

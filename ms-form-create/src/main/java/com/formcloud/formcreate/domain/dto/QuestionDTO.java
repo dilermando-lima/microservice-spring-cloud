@@ -5,44 +5,36 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.formcloud.formcreate.domain.entity.Question;
+import com.formcloud.springutil.util.UtilClass;
 
 
 public class QuestionDTO {
     
-    private String key;
+    private String id;
     private String keyForm;
     private String title;
     private String comment;
     private Integer type;
     private Integer required;
     private Integer width;
+    private Integer versionForm;
+    private Integer position;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(name = "date_insert")
     private LocalDateTime dateInsert;
 
-    
+
+    public Question buildIntoQuestion() throws RuntimeException{
+        return UtilClass.convertObject(this, Question.class);
+    }
+
+    public static QuestionDTO buildIntoQuestionDTO(Question question) throws RuntimeException{
+        return UtilClass.convertObject(question, QuestionDTO.class);
+    }
+
     public QuestionDTO() {
-    }
-
-    public QuestionDTO(String key, String keyForm, String title, String comment, Integer type, Integer required,
-            Integer width, LocalDateTime dateInsert) {
-        this.key = key;
-        this.keyForm = keyForm;
-        this.title = title;
-        this.comment = comment;
-        this.type = type;
-        this.required = required;
-        this.width = width;
-        this.dateInsert = dateInsert;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 
     public String getKeyForm() {
@@ -101,7 +93,28 @@ public class QuestionDTO {
         this.dateInsert = dateInsert;
     }
 
+    public Integer getVersionForm() {
+        return versionForm;
+    }
 
-    
+    public void setVersionForm(Integer versionForm) {
+        this.versionForm = versionForm;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
+    }
 
 }

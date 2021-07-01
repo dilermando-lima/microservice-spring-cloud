@@ -32,7 +32,7 @@ public class FormController {
   public ResponseEntity<?> createNewOne(@RequestBody(required = false) FormDTO formDTO, UriComponentsBuilder uriComponentsBuilder) throws ApiException {
     formDTO = formService.createNewOne(formDTO);
     return ResponseEntity.created(
-                  uriComponentsBuilder.path("/form/{key}/version/{version}").buildAndExpand(formDTO.getKey(), formDTO.getVersion()).toUri()
+                  uriComponentsBuilder.path("/forms/{key}/version/{version}").buildAndExpand(formDTO.getKey(), formDTO.getVersion()).toUri()
                 ).build();
   }
 
@@ -41,7 +41,7 @@ public class FormController {
     
     FormDTO  formDTO = formService.cloneToNewVersion(key, version);
     return ResponseEntity.created(
-                  uriComponentsBuilder.path("/form/{key}/version/{version}").buildAndExpand(formDTO.getKey(), formDTO.getVersion()).toUri()
+                  uriComponentsBuilder.path("/forms/{key}/version/{version}").buildAndExpand(formDTO.getKey(), formDTO.getVersion()).toUri()
                 ).build();
 
   }
@@ -71,7 +71,7 @@ public class FormController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public ResponseEntity<?> update(@PathVariable("key") String key, @PathVariable("version") Integer version, @RequestBody(required = false) FormDTO formDTO, UriComponentsBuilder uriComponentsBuilder) throws ApiException {
     formService.update(key, version, formDTO );
-    return ResponseEntity.noContent().location(uriComponentsBuilder.path("/form/{key}/version/{version}").buildAndExpand(key,version).toUri()).build();
+    return ResponseEntity.noContent().location(uriComponentsBuilder.path("/forms/{key}/version/{version}").buildAndExpand(key,version).toUri()).build();
   }
 
 

@@ -20,7 +20,7 @@
 		<spring-util.version>1.0</spring-util.version>
 		<ms-form-create.version>1.0</ms-form-create.version>
 		<config-server.version>1.0</config-server.version>
-		<springdoc-openapi-ui.version>1.5.2</springdoc-openapi-ui.version>
+		<springdoc-openapi-ui.version>1.5.8</springdoc-openapi-ui.version>
 
 	</properties>
 

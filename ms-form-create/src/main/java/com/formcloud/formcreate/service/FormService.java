@@ -34,10 +34,10 @@ public class FormService {
 
     public FormDTO createNewOne(FormDTO formDTO) throws ApiException {
         
-        Valid.objNull( Err.E_1_8_TITLE_REQUIRED.getMsg(), formDTO);
-        Valid.objNull( Err.E_1_8_TITLE_REQUIRED.getMsg() , formDTO.getTitle() );
-        Valid.check(   Err.E_1_2_KEY_MUST_BE_LESS_255_CARACT.getMsg() , formDTO.getTitle().length() >= 255 );
-        Valid.check(   Err.E_1_3_COMMENT_MUST_BE_LESS_255_CARACT.getMsg() , formDTO.getComment() != null && formDTO.getComment().length() >= 255 );
+        Valid.objNull( Err.F_8_TITLE_REQUIRED.getMsg(), formDTO);
+        Valid.stringNullOrTrimEmpty( Err.F_8_TITLE_REQUIRED.getMsg() , formDTO.getTitle() );
+        Valid.check(   Err.F_2_KEY_MUST_BE_LESS_255_CARACT.getMsg() , formDTO.getTitle().length() >= 255 );
+        Valid.check(   Err.F_3_COMMENT_MUST_BE_LESS_255_CARACT.getMsg() , formDTO.getComment() != null && formDTO.getComment().length() >= 255 );
 
         formDTO.setKey(UtilString.shortUUID());
         formDTO.setDateInsert(UtilDate.getNow());
@@ -50,11 +50,11 @@ public class FormService {
     }
 
     public FormDTO cloneToNewVersion(String key, Integer version) throws ApiException {
-        Valid.objNull(Err.E_1_1_KEY_REQUIRED.getMsg(), key);
-        Valid.objNull(Err.E_1_4_VERSION_REQUIRED.getMsg(), version);
+        Valid.stringNullOrTrimEmpty(Err.F_1_KEY_REQUIRED.getMsg(), key);
+        Valid.objNull(Err.F_4_VERSION_REQUIRED.getMsg(), version);
 
         Form form = formRepository.getFormByKeyAndVersion(key, version);
-        Valid.objNull(HttpStatus.NOT_FOUND, Err.E_1_6_KEY_AND_VERSION_NOT_FOUND.getMsg(), form);
+        Valid.objNull(HttpStatus.NOT_FOUND, Err.F_6_KEY_AND_VERSION_NOT_FOUND.getMsg(), form);
 
         form.setKey(UtilString.shortUUID());
         form.setDateInsert(UtilDate.getNow());
@@ -68,11 +68,11 @@ public class FormService {
     }
 
     public void submit(String key, Integer version) throws ApiException {
-        Valid.objNull(Err.E_1_1_KEY_REQUIRED.getMsg(), key);
-        Valid.objNull(Err.E_1_4_VERSION_REQUIRED.getMsg(), version);
+        Valid.stringNullOrTrimEmpty(Err.F_1_KEY_REQUIRED.getMsg(), key);
+        Valid.objNull(Err.F_4_VERSION_REQUIRED.getMsg(), version);
 
         Form form = formRepository.getFormByKeyAndVersion(key, version);
-        Valid.objNull(HttpStatus.NOT_FOUND, Err.E_1_6_KEY_AND_VERSION_NOT_FOUND.getMsg(), form);
+        Valid.objNull(HttpStatus.NOT_FOUND, Err.F_6_KEY_AND_VERSION_NOT_FOUND.getMsg(), form);
 
         formRepository.changeStatusByKeyAndVersion(StatusForm.SUBMITED.getId(), UtilDate.getNow(), key, version);
     }
@@ -105,7 +105,7 @@ public class FormService {
             selectCustom.andWhere("form.status = ? ", StatusForm.REMOVED);
         }else if(  !UtilString.isEmptyTrim(formDTOFilter.getBy_status() )   ){
 
-            Valid.check( Err.E_1_7_STATUS_INVALID.getMsg(), !StatusForm.containId(UtilNum.parseToInt(formDTOFilter.getBy_status())));
+            Valid.check( Err.F_7_STATUS_INVALID.getMsg(), !StatusForm.containId(UtilNum.parseToInt(formDTOFilter.getBy_status())));
             selectCustom.andWhere("form.status = ? ", UtilNum.parseToInt(formDTOFilter.getBy_status()));
         }
 
@@ -133,35 +133,35 @@ public class FormService {
     }
 
     public FormDTO getLastVersionByKey(String key) throws ApiException {
-        Valid.objNull(Err.E_1_1_KEY_REQUIRED.getMsg(), key);
+        Valid.stringNullOrTrimEmpty(Err.F_1_KEY_REQUIRED.getMsg(), key);
         
-        List<Form> form = formRepository.getFormByKeyOrderByVersionDesc(key, PageRequest.of(0,1));
-        Valid.listNullOrEmpty(HttpStatus.NOT_FOUND, Err.E_1_5_KEY_NOT_FOUND.getMsg(), form);
+        List<Form> form = formRepository.listFormByKeyOrderByVersionDesc(key, PageRequest.of(0,1));
+        Valid.listNullOrEmpty(HttpStatus.NOT_FOUND, Err.F_5_KEY_NOT_FOUND.getMsg(), form);
 
         return  FormDTO.buildIntoFormDTO(form.get(0));
     }
 
     public FormDTO getByKeyAndVersion(String key, Integer version) throws ApiException {
-        Valid.objNull(Err.E_1_1_KEY_REQUIRED.getMsg(), key);
-        Valid.objNull(Err.E_1_4_VERSION_REQUIRED.getMsg(), version);
+        Valid.stringNullOrTrimEmpty(Err.F_1_KEY_REQUIRED.getMsg(), key);
+        Valid.objNull(Err.F_4_VERSION_REQUIRED.getMsg(), version);
         
         Form form = formRepository.getFormByKeyAndVersion(key, version);
-        Valid.objNull(HttpStatus.NOT_FOUND, Err.E_1_6_KEY_AND_VERSION_NOT_FOUND .getMsg(), form);
+        Valid.objNull(HttpStatus.NOT_FOUND, Err.F_6_KEY_AND_VERSION_NOT_FOUND .getMsg(), form);
         return  FormDTO.buildIntoFormDTO(form);
     }
 
     public void update(String key, Integer version, FormDTO formDTO) {
 
-        Valid.objNull(Err.E_1_1_KEY_REQUIRED.getMsg(), key);
-        Valid.objNull(Err.E_1_4_VERSION_REQUIRED.getMsg(), version);
-        Valid.objNull( Err.E_1_8_TITLE_REQUIRED.getMsg(), formDTO);
-        Valid.objNull( Err.E_1_8_TITLE_REQUIRED.getMsg() , formDTO.getTitle() );
-        Valid.check(   Err.E_1_2_KEY_MUST_BE_LESS_255_CARACT.getMsg() , formDTO.getTitle().length() >= 255 );
-        Valid.check(   Err.E_1_3_COMMENT_MUST_BE_LESS_255_CARACT.getMsg() , formDTO.getComment() != null && formDTO.getComment().length() >= 255 );
+        Valid.stringNullOrTrimEmpty(Err.F_1_KEY_REQUIRED.getMsg(), key);
+        Valid.objNull(Err.F_4_VERSION_REQUIRED.getMsg(), version);
+        Valid.objNull( Err.F_8_TITLE_REQUIRED.getMsg(), formDTO);
+        Valid.stringNullOrTrimEmpty( Err.F_8_TITLE_REQUIRED.getMsg() , formDTO.getTitle() );
+        Valid.check(   Err.F_2_KEY_MUST_BE_LESS_255_CARACT.getMsg() , formDTO.getTitle().length() >= 255 );
+        Valid.check(   Err.F_3_COMMENT_MUST_BE_LESS_255_CARACT.getMsg() , formDTO.getComment() != null && formDTO.getComment().length() >= 255 );
 
         
         Form formToUpdate = formRepository.getFormByKeyAndVersion(key, version);
-        Valid.objNull(HttpStatus.NOT_FOUND, Err.E_1_6_KEY_AND_VERSION_NOT_FOUND .getMsg(), formToUpdate);
+        Valid.objNull(HttpStatus.NOT_FOUND, Err.F_6_KEY_AND_VERSION_NOT_FOUND .getMsg(), formToUpdate);
 
         formToUpdate.setComment(formDTO.getComment());
         formToUpdate.setTitle(formDTO.getTitle());
