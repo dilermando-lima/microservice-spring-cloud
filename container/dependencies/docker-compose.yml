@@ -3,23 +3,23 @@ version: "3.9"
 
 services:
     mysqldb_ms:
-        container_name: mysqldb_ms
+        container_name: ${MSF_MYSQL_FORM_CREATE_NAME_CONTAINER}
         image: mysql:8
         command: --default-authentication-plugin=mysql_native_password 
         environment:
-            MYSQL_ROOT_PASSWORD: "root"
-            MYSQL_DATABASE: "form-create"
+            MYSQL_ROOT_PASSWORD: ${MSF_MYSQL_FORM_CREATE_PASS}
+            MYSQL_DATABASE: ${MSF_MYSQL_FORM_CREATE_DATABASE}
         ports:
-         - 3306:3306
+         - ${MSF_MYSQL_FORM_CREATE_PORT}:3306
         #volumes:
         #  - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
     rabbitmq_ms:
         image: rabbitmq:3-management
-        container_name: rabbitmq_ms
+        container_name: ${MSF_RABBIT_NAME_CONTAINER}
         volumes:
          - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
          - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
         ports:
-         - 5672:5672
-         - 15672:15672
+         - ${MSF_RABBIT_PORT}:5672
+         - ${MSF_RABBIT_PORT_WEB}:15672

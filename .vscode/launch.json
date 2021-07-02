@@ -6,7 +6,8 @@
             "name": "ms-form-create run",
             "request": "launch",
             "mainClass": "com.formcloud.formcreate.MsFormCreateApplication",
-            "projectName": "ms-form-create"
+            "projectName": "ms-form-create",
+            "envFile": "${workspaceFolder}/props/local.env"
         },
         {
             "type": "java",
@@ -14,7 +15,8 @@
             "console": "internalConsole",
             "request": "launch",
             "mainClass": "com.formcloud.configserver.ConfigServerApplication",
-            "projectName": "config-server"
+            "projectName": "config-server",
+            "envFile": "${workspaceFolder}/props/local.env"
         }
     ]
 }
