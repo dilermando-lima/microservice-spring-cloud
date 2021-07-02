@@ -18,13 +18,17 @@ public class Form {
     private String id;
 
     @PrePersist
-    public void buildId() {
-        if( this.key == null && this.version == null ) throw new RuntimeException("key and version cannot be null");
-        this.id = this.key + "-" + this.version;
+    public void buildNewId() {
+        if( this.keyForm == null && this.versionForm == null ) throw new RuntimeException("keyForm and versionForm cannot be null");
+        this.id = this.keyForm + "-" + this.versionForm;
     }
 
-    private String key;
-    private Integer version;
+    @Column(name = "key_form")
+    private String keyForm;
+
+    @Column(name = "version_form")
+    private Integer versionForm;
+
     @Column(name="version_previous")
     private Integer versionPrevious;
     private String title;
@@ -43,18 +47,22 @@ public class Form {
     public Form() {
     }
 
-    public String getKey() {
-        return key;
+    public String getKeyForm() {
+        return keyForm;
     }
-    public void setKey(String key) {
-        this.key = key;
+
+    public void setKeyForm(String keyForm) {
+        this.keyForm = keyForm;
     }
-    public Integer getVersion() {
-        return version;
+
+    public Integer getVersionForm() {
+        return versionForm;
     }
-    public void setVersion(Integer version) {
-        this.version = version;
+
+    public void setVersionForm(Integer versionForm) {
+        this.versionForm = versionForm;
     }
+
     public String getTitle() {
         return title;
     }

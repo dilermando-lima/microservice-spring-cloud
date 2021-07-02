@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 
 import com.formcloud.formcreate.domain.entity.Form;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,17 +15,24 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FormRepository extends JpaRepository<Form, String> {
 
-    @Query("select obj from #{#entityName} obj where key = ?1 order by version desc")
-    List<Form> listFormByKeyOrderByVersionDesc(String key, Pageable pageable);
+    @Query("select obj from #{#entityName} obj where keyForm = ?1 and versionForm = ?2 ")
+    Form getFormByKeyAndVersion(String keyForm, Integer versionForm);
 
-    @Query("select obj from #{#entityName} obj where key = ?1 and version = ?2 ")
-    Form getFormByKeyAndVersion(String key, Integer version);
+    @Query("select obj from #{#entityName} obj where keyForm = ?1 and status = ?2 ")
+    List<Form> listFormByKeyAndStatus(String keyForm, Integer status);
 
-    @Query("select max(version) from #{#entityName} obj where key = ?1")
-    Integer getNumLastVersionByKey(String key);
+    @Query("select obj from #{#entityName} obj where keyForm = ?1")
+    List<Form> listFormByKey(String keyForm);
+
+    @Query("select max(versionForm) from #{#entityName} obj where keyForm = ?1")
+    Integer getNumLastVersionByKey(String keyForm);
 
     @Modifying(clearAutomatically=true)  @Transactional 
-    @Query("update #{#entityName} obj set obj.status = ?1 , obj.dateLastUpdate = ?2  where obj.key = ?3 and obj.version = ?4 ") 
-    void changeStatusByKeyAndVersion( Integer status ,  LocalDateTime dateLastUpdate, String key, Integer version);
+    @Query("update #{#entityName} obj set obj.status = ?1 , obj.dateLastUpdate = ?2  where obj.keyForm = ?3 and obj.versionForm = ?4 ") 
+    void changeStatusByKeyAndVersion( Integer status ,  LocalDateTime dateLastUpdate, String keyForm, Integer versionForm);
+
+    @Modifying(clearAutomatically=true)  @Transactional 
+    @Query("update #{#entityName} obj set obj.status = ?1 , obj.dateLastUpdate = ?2  where obj.keyForm = ?3 ") 
+    void changeStatusByKey( Integer status ,  LocalDateTime dateLastUpdate, String keyForm);
 
 }

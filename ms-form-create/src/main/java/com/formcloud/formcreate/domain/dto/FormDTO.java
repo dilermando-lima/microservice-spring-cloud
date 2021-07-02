@@ -9,8 +9,8 @@ import com.formcloud.springutil.util.UtilClass;
 public class FormDTO {
 
     private String id;
-    private String key;
-    private Integer version;
+    private String keyForm;
+    private Integer versionForm;
     private String title;
     private String comment;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -32,10 +32,10 @@ public class FormDTO {
     }
     
 
-    public FormDTO(String key, Integer version, String title, String comment, LocalDateTime dateInsert,
+    public FormDTO(String keyForm, Integer versionForm, String title, String comment, LocalDateTime dateInsert,
             Integer versionPrevious, Integer status, LocalDateTime dateLastUpdate) {
-        this.key = key;
-        this.version = version;
+        this.keyForm = keyForm;
+        this.versionForm = versionForm;
         this.title = title;
         this.comment = comment;
         this.dateInsert = dateInsert;
@@ -44,19 +44,22 @@ public class FormDTO {
         this.dateLastUpdate = dateLastUpdate;
     }
 
+    public String getKeyForm() {
+        return keyForm;
+    }
 
-    public String getKey() {
-        return key;
+    public void setKeyForm(String keyForm) {
+        this.keyForm = keyForm;
     }
-    public void setKey(String key) {
-        this.key = key;
+
+    public Integer getVersionForm() {
+        return versionForm;
     }
-    public Integer getVersion() {
-        return version;
+
+    public void setVersionForm(Integer versionForm) {
+        this.versionForm = versionForm;
     }
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
+
     public String getTitle() {
         return title;
     }

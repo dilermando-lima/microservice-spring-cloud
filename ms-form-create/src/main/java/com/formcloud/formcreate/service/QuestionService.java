@@ -7,6 +7,7 @@ import com.formcloud.formcreate.constant.Err;
 import com.formcloud.formcreate.domain.dto.QuestionDTO;
 import com.formcloud.formcreate.domain.entity.Form;
 import com.formcloud.formcreate.domain.entity.Question;
+import com.formcloud.formcreate.domain.enums.StatusForm;
 import com.formcloud.formcreate.domain.enums.TypeBoolean;
 import com.formcloud.formcreate.domain.enums.TypeQuestion;
 import com.formcloud.formcreate.domain.enums.WidthQuestion;
@@ -37,6 +38,10 @@ public class QuestionService {
 
         Form form = formRepository.getFormByKeyAndVersion(keyForm, versionForm);
         Valid.objNull( Err.Q_11_KEYF_AND_VERSIONF_NOT_FOUND.getMsg(), form);
+
+        Valid.check(Err.F_13_FORM_MUST_BE_ON_DRAFT.getMsg(), form.getStatus() != StatusForm.ON_DRAFT.getId() );
+  
+
     
         questionDTOList.forEach(this::validateQuestion);
 
@@ -48,6 +53,8 @@ public class QuestionService {
         questionRepository.deleteByKeyForm(keyForm);
 
         questionList.forEach(questionRepository::save);
+
+        formRepository.changeStatusByKeyAndVersion(StatusForm.ON_DRAFT.getId(), UtilDate.getNow(), keyForm, versionForm);
     }
 
     public List<QuestionDTO> listByKeyAndVersionForm(String keyForm, Integer versionForm) throws ApiException{

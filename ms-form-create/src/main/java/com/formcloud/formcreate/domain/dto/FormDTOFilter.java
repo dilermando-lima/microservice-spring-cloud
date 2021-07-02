@@ -2,8 +2,8 @@ package com.formcloud.formcreate.domain.dto;
 
 public class FormDTOFilter {
     
-    private String contain_litle;
-    private String contain_comment;
+    private String contains_title;
+    private String contains_comment;
     private String num_page;
     private String page_size;
     private String by_status;
@@ -22,17 +22,12 @@ public class FormDTOFilter {
     public void setOnly_removed(String only_removed) {
         this.only_removed = only_removed;
     }
-    public String getContain_litle() {
-        return contain_litle;
+  
+    public String getContains_comment() {
+        return contains_comment;
     }
-    public void setContain_litle(String contain_litle) {
-        this.contain_litle = contain_litle;
-    }
-    public String getContain_comment() {
-        return contain_comment;
-    }
-    public void setContain_comment(String contain_comment) {
-        this.contain_comment = contain_comment;
+    public void setContains_comment(String contains_comment) {
+        this.contains_comment = contains_comment;
     }
     public String getNum_page() {
         return num_page;
@@ -52,7 +47,12 @@ public class FormDTOFilter {
     public void setBy_key(String by_key) {
         this.by_key = by_key;
     }
+    public String getContains_title() {
+        return contains_title;
+    }
+    public void setContains_title(String contains_title) {
+        this.contains_title = contains_title;
+    }
 
-    
 
 }

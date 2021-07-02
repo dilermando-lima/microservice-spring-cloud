@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# bash spring-deps/mvn-install-all.sh
+# bash mvn-install-all.sh
 
 NAMES_REPOSITORY=(
     "spring-deps"
