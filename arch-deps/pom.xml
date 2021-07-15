@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.2</version>
+		<relativePath />
+	</parent>
+
+	<packaging>pom</packaging>
+	<groupId>com.formcloud</groupId>
+	<artifactId>arch-deps</artifactId>
+	<version>1.0</version>
+	<name>arch-deps</name>
+	<description>Project will unify all dependencies to all projects</description>
+	<properties>
+		<java.version>11</java.version>
+
+		<!-- internal -->
+		<arch-amqp.version>1.0</arch-amqp.version>
+		<arch-commons.version>1.0</arch-commons.version>
+		<ms-form-create.version>1.0</ms-form-create.version>
+
+		<!-- external spring -->
+		<spring-cloud.version>2020.0.3</spring-cloud.version>
+		<spring-rabbit.version>2.3.9</spring-rabbit.version>
+		<config-server.version>1.0</config-server.version>
+
+		<spring-cloud-config-server.version>3.0.4</spring-cloud-config-server.version>
+		<spring-cloud-starter-config.version>3.0.4</spring-cloud-starter-config.version>
+		<spring-cloud-starter-bootstrap.version>3.0.3</spring-cloud-starter-bootstrap.version>
+
+		<spring-boot-starter-data-jpa.version>2.5.2</spring-boot-starter-data-jpa.version>
+		<spring-boot-starter-jdbc.version>2.5.2</spring-boot-starter-jdbc.version>
+		<spring-boot-starter-test.version>2.5.2</spring-boot-starter-test.version>
+		<spring-boot-maven-plugin.version>2.5.2</spring-boot-maven-plugin.version>
+
+		<springdoc-openapi-ui.version>1.5.8</springdoc-openapi-ui.version>
+		
+		<!-- external others -->
+		<mysql-connector-java.version>8.0.25</mysql-connector-java.version>
+
+		
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc-openapi-ui.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

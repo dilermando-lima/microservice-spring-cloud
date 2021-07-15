@@ -4,6 +4,14 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.formcloud.archamqp.entity.form.FormMSG;
+import com.formcloud.archamqp.template.RabbitTemplateForm;
+import com.formcloud.archcommons.database.SelectCustom;
+import com.formcloud.archcommons.errorhandler.ApiException;
+import com.formcloud.archcommons.util.UtilDate;
+import com.formcloud.archcommons.util.UtilNum;
+import com.formcloud.archcommons.util.UtilString;
+import com.formcloud.archcommons.valid.Valid;
 import com.formcloud.formcreate.constant.Err;
 import com.formcloud.formcreate.domain.dto.FormDTO;
 import com.formcloud.formcreate.domain.dto.FormDTOFilter;
@@ -11,12 +19,6 @@ import com.formcloud.formcreate.domain.entity.Form;
 import com.formcloud.formcreate.domain.enums.StatusForm;
 import com.formcloud.formcreate.repository.FormRepository;
 import com.formcloud.formcreate.repository.QuestionRepository;
-import com.formcloud.springutil.database.SelectCustom;
-import com.formcloud.springutil.errorhandler.ApiException;
-import com.formcloud.springutil.util.UtilDate;
-import com.formcloud.springutil.util.UtilNum;
-import com.formcloud.springutil.util.UtilString;
-import com.formcloud.springutil.valid.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +39,7 @@ public class FormService {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private SendQueueService sendQueueService;
+    private RabbitTemplateForm rabbitTemplateForm;
 
     public FormDTO create(FormDTO formDTO) throws ApiException {
         
@@ -53,6 +55,10 @@ public class FormService {
         formDTO.setVersionForm(1);
         formDTO.setStatus(StatusForm.ON_DRAFT.getId());
         formDTO.setId(null); // generate new one
+
+        FormMSG formM  = new FormMSG();
+        formM.setTitle("from rabbit pub create");
+        rabbitTemplateForm.sendPublishedForm(formM);
 
         return  FormDTO.buildIntoFormDTO(formRepository.save( formDTO.buildIntoForm()));
     }
@@ -144,7 +150,10 @@ public class FormService {
 
         formRepository.changeStatusByKeyAndVersion(StatusForm.PUBLISHED.getId(), UtilDate.getNow(), keyForm, versionForm);
 
-        sendQueueService.sendPublishedFormToQueue(FormDTO.buildIntoFormDTO(form));
+        FormMSG formM  = new FormMSG();
+        formM.setTitle("from rabbit pub");
+        rabbitTemplateForm.sendPublishedForm(formM);
+        //sendQueueService.sendPublishedFormToQueue(FormDTO.buildIntoFormDTO(form));
     }
 
     public void unpublish(String keyForm, Integer versionForm) throws ApiException {
@@ -159,7 +168,9 @@ public class FormService {
 
         formRepository.changeStatusByKeyAndVersion(StatusForm.UNPUBLISHED.getId(), UtilDate.getNow(), keyForm, versionForm);
 
-        sendQueueService.sendUnPublishedFormToQueue(FormDTO.buildIntoFormDTO(form));
+        FormMSG formM  = new FormMSG();
+        formM.setTitle("from rabbit unp");
+        rabbitTemplateForm.sendUnpublishedForm(formM);
 
     }
 

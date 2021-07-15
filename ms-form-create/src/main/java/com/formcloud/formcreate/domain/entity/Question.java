@@ -9,7 +9,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.formcloud.springutil.util.UtilString;
+import com.formcloud.archcommons.util.UtilString;
 
 @Entity
 @Table(name="question")

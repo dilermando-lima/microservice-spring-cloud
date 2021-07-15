@@ -6,7 +6,7 @@ import com.formcloud.formcreate.constant.Endpoint;
 import com.formcloud.formcreate.domain.dto.FormDTO;
 import com.formcloud.formcreate.domain.dto.FormDTOFilter;
 import com.formcloud.formcreate.service.FormService;
-import com.formcloud.springutil.errorhandler.ApiException;
+import com.formcloud.archcommons.errorhandler.ApiException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

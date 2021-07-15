@@ -3,8 +3,9 @@
 # bash mvn-install-all.sh
 
 NAMES_REPOSITORY=(
-    "spring-deps"
-	"spring-util"
+    "arch-deps"
+	"arch-commons"
+    "arch-amqp"
 	"config-server"
     "ms-form-create"
 )
@@ -18,7 +19,7 @@ done
 echo -e "\nDo you wish run 'mvn clean install' to all projects (Y/N)?"
 read CONTINUE_DWNLD;
 
-if [ "$CONTINUE_DWNLD" == "Y" ]; then
+if [ "$CONTINUE_DWNLD" == "Y" ] || [ "$CONTINUE_DWNLD" == "y" ]; then
 
     for REPOSITORY in ${NAMES_REPOSITORY[*]}; do
         echo -e "\nrunning project $REPOSITORY\n"

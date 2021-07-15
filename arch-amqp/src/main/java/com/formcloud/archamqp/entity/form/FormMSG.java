@@ -1,47 +1,29 @@
-package com.formcloud.formcreate.domain.dto;
+package com.formcloud.archamqp.entity.form;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.formcloud.formcreate.domain.entity.Form;
-import com.formcloud.archcommons.util.UtilClass;
+import com.formcloud.archamqp.abstracts.EntityBase;
 
-public class FormDTO {
+public class FormMSG extends EntityBase{
 
     private String id;
     private String keyForm;
     private Integer versionForm;
     private String title;
     private String comment;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateInsert;
     private Integer versionPrevious;
     private Integer status;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateLastUpdate;
+    private List<QuestionMSG> questionList;
 
-    public FormDTO() {
+    public String getId() {
+        return id;
     }
 
-    public Form buildIntoForm() throws RuntimeException{
-        return UtilClass.convertObject(this, Form.class);
-    }
-
-    public static FormDTO buildIntoFormDTO(Form form) throws RuntimeException{
-        return UtilClass.convertObject(form, FormDTO.class);
-    }
-    
-
-    public FormDTO(String keyForm, Integer versionForm, String title, String comment, LocalDateTime dateInsert,
-            Integer versionPrevious, Integer status, LocalDateTime dateLastUpdate) {
-        this.keyForm = keyForm;
-        this.versionForm = versionForm;
-        this.title = title;
-        this.comment = comment;
-        this.dateInsert = dateInsert;
-        this.versionPrevious = versionPrevious;
-        this.status = status;
-        this.dateLastUpdate = dateLastUpdate;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getKeyForm() {
@@ -63,12 +45,15 @@ public class FormDTO {
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getComment() {
         return comment;
     }
+
     public void setComment(String comment) {
         this.comment = comment;
     }
@@ -104,14 +89,16 @@ public class FormDTO {
     public void setDateLastUpdate(LocalDateTime dateLastUpdate) {
         this.dateLastUpdate = dateLastUpdate;
     }
- 
-    public String getId() {
-        return id;
+
+    public List<QuestionMSG> getQuestionList() {
+        return questionList;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setQuestionList(List<QuestionMSG> questionList) {
+        this.questionList = questionList;
     }
+
+    
 
     
 }

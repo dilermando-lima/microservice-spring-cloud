@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>com.formcloud</groupId>
-		<artifactId>spring-deps</artifactId>
+		<artifactId>arch-deps</artifactId>
 		<version>1.0</version>
 	</parent>
 
@@ -17,57 +17,62 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.formcloud</groupId>
-			<artifactId>spring-util</artifactId>
-			<version>${spring-util.version}</version>
+			<artifactId>arch-commons</artifactId>
+			<version>${arch-commons.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${spring-boot-starter-data-jpa.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<version>${spring-boot-starter-jdbc.version}</version>
 		</dependency>
 
 		<!-- config server client -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
+			<version>${spring-cloud-starter-config.version}</version>
 		</dependency>
 
 		<!-- config server client to use bootstrap.properties on start up -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+			<version>${spring-cloud-starter-bootstrap.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${spring-boot-starter-test.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-java.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency>
+		<!-- TODO: remove later -->
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
-		</dependency>
-		
+		</dependency> -->
 
-		<!-- 
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency> 
-		-->
+			<groupId>com.formcloud</groupId>
+			<artifactId>arch-amqp</artifactId>
+			<version>${arch-amqp.version}</version>
+		</dependency>
+
 
 	</dependencies>
 
@@ -76,6 +81,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot-maven-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>

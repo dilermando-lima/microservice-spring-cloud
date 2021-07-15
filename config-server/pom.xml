@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.formcloud</groupId>
-		<artifactId>spring-deps</artifactId>
+		<artifactId>arch-deps</artifactId>
 		<version>1.0</version>
 		<relativePath/>
 	</parent>
@@ -19,6 +19,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-config-server</artifactId>
+				<version>${spring-cloud-config-server.version}</version>
 			</dependency>
 	</dependencies>
 

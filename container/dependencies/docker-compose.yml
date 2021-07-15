@@ -15,11 +15,11 @@ services:
         #  - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
     rabbitmq_ms:
-        image: rabbitmq:3-management
+        image: rabbitmq:3.8-management
         container_name: ${MSF_RABBIT_NAME_CONTAINER}
-        volumes:
-         - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-         - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+        # volumes:
+        # - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+        # - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
         ports:
          - ${MSF_RABBIT_PORT}:5672
          - ${MSF_RABBIT_PORT_WEB}:15672
